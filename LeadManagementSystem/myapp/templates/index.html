@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+
+{%block main%}
+
+<div class="row mt-4">
+    <div class="col-2"></div>
+    <div class="col-4">
+        <h5>Status </h5>
+        <div class="mt-4">
+            <canvas id="StatusChart"></canvas>
+        </div>
+    </div>
+    <div class="col-4">
+        <h5>Source </h5>
+        <div class="mt-4">
+            <canvas id="SourceChart"></canvas>
+        </div>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-12 mt-5 bg-primary text-center">
+        <h4>Total Lead : {{count}}</h4>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx1 = document.getElementById('StatusChart');
+  
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: [{%for stat in status_summery%}'{{stat.status}}',{%endfor%}],
+        datasets: [{
+          label: '# of Votes',
+          data: [{%for c in status_summery%}{{c.count}},{%endfor%}],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const ctx2 = document.getElementById('SourceChart');
+  
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: [{%for src in source_summery%}'{{src.source}}',{%endfor%}],
+      datasets: [{
+        label: '# of Votes',
+        data: [{%for c in source_summery%}{{c.count}},{%endfor%}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  </script>
+
+{%endblock%}

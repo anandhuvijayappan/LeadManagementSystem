@@ -22,5 +22,11 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('lead/add/',views.CreateLeadView.as_view(),name="create_lead")
+    path('lead/add/',views.CreateLeadView.as_view(),name="create_lead"),
+
+    path('lead/<int:pk>/remove/',views.LeadDeleteView.as_view(),name="delete_lead"),
+
+    path('lead/<int:pk>/edit/',views.LeadUpdateView.as_view(),name="edit_lead"),
+
+    path('',views.IndexView.as_view(),name="index")
 ]

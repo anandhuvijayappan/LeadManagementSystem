@@ -10,3 +10,9 @@ class LeadForm(forms.ModelForm):
         model=Lead
 
         fields="__all__"
+
+        widgets={
+
+            "source":forms.Select(attrs={"class":"form-control"}),
+            "status":forms.Select(attrs={"class":"form-control"})
+        }
